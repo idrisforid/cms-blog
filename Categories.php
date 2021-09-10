@@ -1,4 +1,16 @@
 <?php require_once("Includes\DB.php");?>
+<?php require_once("Includes\Functions.php");?>
+<?php
+
+if (isset($_POST["submit"])) {
+  $Category= $_POST['CategoryTitle'];
+
+  if (empty($Category)) {
+    echo "All field must be filled out!";
+     Redirect_to("Categories.php");
+  }
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -85,14 +97,14 @@
              <div class="card-body bg-dark">
                <div class="form-group">
                  <label for="title"> <span class="FieldInfo"> Category Title </span> </label>
-                 <input class="form-control" type="text" name="Title" id="title" placeholder="Type title here" >
+                 <input class="form-control" type="text" name="CategoryTitle" id="title" placeholder="Type title here" >
                </div>
                <div class="row">
                  <div class="col-lg-6 mb-2">
                    <a href="Dashboard.php" class="btn btn-warning btn-block"> <i class="fas fa-arrow-left"></i> Back Dashboard</a>
                  </div>
                  <div class="col-lg-6 mb-2">
-                   <button type="button" name="Submit" class="btn btn-success btn-block"> <i class="fas fa-check"></i> Publish </button>
+                   <button type="submit" name="submit" class="btn btn-success btn-block"> <i class="fas fa-check"></i> Publish </button>
                  </div>
                </div>
              </div>
