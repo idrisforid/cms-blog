@@ -1,12 +1,17 @@
 <?php require_once("Includes\DB.php");?>
 <?php require_once("Includes\Functions.php");?>
+<?php require_once("Includes\Sessions.php");?>
 <?php
 
 if (isset($_POST["submit"])) {
   $Category= $_POST['CategoryTitle'];
 
   if (empty($Category)) {
-    echo "All field must be filled out!";
+    $_SESSION["ErrorMessage"]= "All field must be filled out!";
+     Redirect_to("Categories.php");
+  }
+  if (!empty($Category)) {
+    $_SESSION["SuccessMessage"]= "thanks";
      Redirect_to("Categories.php");
   }
 }
@@ -89,6 +94,12 @@ if (isset($_POST["submit"])) {
 <section class="container py-2 mb-4">
   <div class="row" style="height: 350px;">
     <div class="offset-lg-1 col-lg-10">
+
+        <?php 
+           echo ErrorMessage();
+           echo SuccessMessage();
+         ?>
+
         <form class="" action="Categories.php" method="post">
            <div class="card bg-secondary text-light mb-3">
              <div class="card-header">
