@@ -1,3 +1,5 @@
+<?php require_once("Includes\DB.php");?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +16,9 @@
   <!--Navbar Start-->
 
   <div style="height: 10px; background: #27aae1"></div>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
-	<a href="" class="navbar-brand">Forid.com</a>
+	<a href="#" class="navbar-brand">Forid.com</a>
 
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarcollapseCMS">
       <span class="navbar-toggler-icon"></span>
@@ -47,13 +49,13 @@
           	<a href="Blog.php" class="nav-link">Live Blog</a>
           </li>   
     </ul>
-     <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="Logout.php" class="nav-link text-danger"> <i class="fas fa-user-times"></i> Logout</a>
+            <a href="Logout.php" class="nav-link text-danger"> <i class="fas fa-user-times"></i> Logout</a>
             </li>
     </ul>
       </div>
-
+    </div>
 </nav>
   <div style="height: 10px; background: #27aae1"></div>
 
@@ -90,7 +92,7 @@
                    <a href="Dashboard.php" class="btn btn-warning btn-block"> <i class="fas fa-arrow-left"></i> Back Dashboard</a>
                  </div>
                  <div class="col-lg-6 mb-2">
-                   <button type="button" name="Submit" class="btn btn-success btn-block"> <i class="fas fa-check"></i> Publish</a> </button>
+                   <button type="button" name="Submit" class="btn btn-success btn-block"> <i class="fas fa-check"></i> Publish </button>
                  </div>
                </div>
              </div>
