@@ -72,7 +72,6 @@
 <!--Header End-->
 
 <!--Main area-->
-
 <section class="container py-2 mb-4">
   <div class="row" style="height: 350px;">
     <div class="offset-lg-1 col-lg-10">
