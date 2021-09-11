@@ -1,11 +1,18 @@
-<?php require_once("Includes\DB.php");?>
-<?php require_once("Includes\Functions.php");?>
-<?php require_once("Includes\Sessions.php");?>
+<?php require_once("Includes/DB.php");?>
+
+ <?php require_once("Includes/Functions.php");?>
+
+ <?php require_once("Includes/Sessions.php");?>
 <?php
 
 if (isset($_POST["submit"])) {
   $Category= $_POST['CategoryTitle'];
   $Admin ="admin";
+
+  date_default_timezone_set("Asia/Dhaka");
+  $CurrentTime=time();
+  $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
+  
 
   if (empty($Category)) {
     $_SESSION["ErrorMessage"]= "All field must be filled out!";
@@ -21,6 +28,26 @@ if (isset($_POST["submit"])) {
   }
   else{
     //Query to insert DB when everything fine
+
+     global $ConnectingDB;
+
+    $sql = "INSERT INTO category(title,author,datetime)";
+    $sql.= "VALUES(:categoryName,:adminName,:dateTime)";
+    $stmt= $ConnectingDB->prepare($sql);
+    //$stmt = $ConnectingDB->prepare($sql); 
+    $stmt->bindValue(':categoryName',$Category);
+    $stmt->bindValue(':adminName',$Admin);
+    $stmt->bindValue(':dateTime',$DateTime);
+    $Execute=$stmt->execute();
+
+    if ($Execute) {
+      $_SESSION["SuccessMessage"]="Category Added Successfully";
+      Redirect_to("Basic.html");
+    }
+    else{
+      $_SESSION["ErrorMessage"]="Category Added Fail. Try again.";
+      Redirect_to("Categories.php");
+    }
   }
 }
 ?>
