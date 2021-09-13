@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
      Redirect_to("Categories.php");
   }
   else{
-    //Query to insert DB when everything fine
+    //Query to insert category to DB when everything fine
 
      global $ConnectingDB;
 

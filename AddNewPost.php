@@ -6,7 +6,11 @@
 <?php
 
 if (isset($_POST["submit"])) {
-  $Category= $_POST['CategoryTitle'];
+  $PostTitle= $_POST["PostTitle"];
+  $Category = $_POST["Category"];
+  $Image = $_FILES["Image"]["name"];
+  $Target   = "Uploads/".basename($_FILES["Image"]["name"]);
+  $PostText = $_POST["PostDescription"];
   $Admin ="admin";
 
   date_default_timezone_set("Asia/Dhaka");
@@ -14,20 +18,20 @@ if (isset($_POST["submit"])) {
   $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
   
 
-  if (empty($Category)) {
-    $_SESSION["ErrorMessage"]= "All field must be filled out!";
-     Redirect_to("Categories.php");
+  if (empty($PostTitle)) {
+    $_SESSION["ErrorMessage"]= "Title!";
+     Redirect_to("AddNewPost.php");
   }
-  else if (strlen($Category)<3) {
-    $_SESSION["ErrorMessage"]= "Category title should be greater than 3 characters";
-     Redirect_to("Categories.php");
+  else if (strlen($PostTitle)<3) {
+    $_SESSION["ErrorMessage"]= "Post title should be greater than 3 characters";
+     Redirect_to("AddNewPost.php");
   }
-  else if (strlen($Category)>49) {
-    $_SESSION["ErrorMessage"]= "Category title should be less than 50 characters";
-     Redirect_to("Categories.php");
+  else if (strlen($PostText)>1000) {
+    $_SESSION["ErrorMessage"]= "Post text should be less than 50 characters";
+     Redirect_to("AddNewPost.php");
   }
   else{
-    //Query to insert DB when everything fine
+    //Query to insert post to DB when everything fine
 
      global $ConnectingDB;
 
@@ -134,7 +138,7 @@ if (isset($_POST["submit"])) {
            echo SuccessMessage();
          ?>
 
-        <form class="" action="Categories.php" method="post">
+        <form class="" action="AddNewPost.php" method="post" enctype="multipart/form-data">
            <div class="card bg-secondary text-light mb-3">
              
              <div class="card-body bg-dark">
