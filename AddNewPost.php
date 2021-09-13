@@ -117,17 +117,17 @@ if (isset($_POST["submit"])) {
 <header class="bg-dark text-white py-3">
   <div class="container">
     <div class="row">
-      <h1> <i class="fas fa-edit" style="color: #27aae1;"></i> Manage Categories</h1>
+      <h1> <i class="fas fa-edit" style="color: #27aae1;"></i> Add New Post</h1>
     </div>
   </div>
 </header>
-<br>
+
 <!--Header End-->
 
 <!--Main area-->
 <section class="container py-2 mb-4">
-  <div class="row" style="height: 350px;">
-    <div class="offset-lg-1 col-lg-10">
+  <div class="row" style="min-height: 340px;">
+    <div class="offset-lg-1 col-lg-10" >
 
         <?php 
            echo ErrorMessage();
@@ -136,18 +136,36 @@ if (isset($_POST["submit"])) {
 
         <form class="" action="Categories.php" method="post">
            <div class="card bg-secondary text-light mb-3">
-             <div class="card-header">
-               <h1>Add new Category</h1>
-             </div>
+             
              <div class="card-body bg-dark">
                <div class="form-group">
-                 <label for="title"> <span class="FieldInfo"> Category Title </span> </label>
-                 <input class="form-control" type="text" name="CategoryTitle" id="title" placeholder="Type title here" >
+                 <label for="title"> <span class="FieldInfo"> Post Title </span> </label>
+                 <input class="form-control" type="text" name="PostTitle" id="title" placeholder="Type title here" >
                </div>
+               <div class="form-group">
+                 <label for="CategoryTitle"> <span class="FieldInfo"> Choose Category </span> </label>
+                 <select class="form-control" id="CategoryTitle" name="Category">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+               </div>
+               <div class="form-group">
+                 <div class="custom-file">
+                 <input class="custom-file-input" type="File" name="Image" id="imageSelect" value="">
+                 <label for="imageSelect" class="custom-file-label">Select Image</label>
+                 </div>
+               </div>
+               <div class="mb-3">
+                 <label for="Post"> <span class="FieldInfo"> Post </span> </label>
+                 <textarea class="form-control" id="Post" name="PostDescription" rows="8" cols="80"></textarea>
+               </div>
+
                <div class="row">
                  <div class="col-lg-6 mb-2">
                    <a href="Dashboard.php" class="btn btn-warning btn-block"> <i class="fas fa-arrow-left"></i> Back Dashboard</a>
                  </div>
+
                  <div class="col-lg-6 mb-2">
                    <button type="submit" name="submit" class="btn btn-success btn-block"> <i class="fas fa-check"></i> Publish </button>
                  </div>
