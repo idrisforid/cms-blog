@@ -126,7 +126,7 @@ if (isset($_POST["submit"])) {
 
 <!--Main area-->
 <section class="container py-2 mb-4">
-  <div class="row" style="height: 350px;">
+  <div class="row" style="min-height: 350px;">
     <div class="offset-lg-1 col-lg-10">
 
         <?php 
