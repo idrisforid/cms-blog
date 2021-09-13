@@ -35,21 +35,25 @@ if (isset($_POST["submit"])) {
 
      global $ConnectingDB;
 
-    $sql = "INSERT INTO category(title,author,datetime)";
-    $sql.= "VALUES(:categoryName,:adminName,:dateTime)";
-    $stmt= $ConnectingDB->prepare($sql); 
+    $sql = "INSERT INTO posts(datetime,title,category,author,image,post)";
+    $sql.= "VALUES(:dateTime,:postTitle,:categoryName,:adminName,:imageName,:postDescription)";
+    $stmt= $ConnectingDB->prepare($sql);
+    $stmt->bindValue(':dateTime',$DateTime);
+    $stmt->bindValue(':postTitle',$PostTitle); 
     $stmt->bindValue(':categoryName',$Category);
     $stmt->bindValue(':adminName',$Admin);
-    $stmt->bindValue(':dateTime',$DateTime);
-    $Execute=$stmt->execute();
+    $stmt->bindValue(':imageName',$Image);
+    $stmt->bindValue(':postDescription',$PostText);
 
+    $Execute=$stmt->execute();
+    move_uploaded_file($_FILES["Image"]["tmp_name"],$Target);
     if ($Execute) {
-      $_SESSION["SuccessMessage"]="Category with id: ".$ConnectingDB->lastInsertId()." Added Successfully";
-      Redirect_to("Categories.php");
+      $_SESSION["SuccessMessage"]="Post with id: ".$ConnectingDB->lastInsertId()." Added Successfully";
+      Redirect_to("AddNewPost.php");
     }
     else{
       $_SESSION["ErrorMessage"]="Category Added Fail. Try again.";
-      Redirect_to("Categories.php");
+      Redirect_to("AddNewPost.php");
     }
   }
 }
@@ -62,7 +66,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<title>
-		Categories
+		Add New Post
 	</title>
 	<link rel="stylesheet" type="text/css" href="Css/Styles.css">
 </head>
