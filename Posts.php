@@ -1,3 +1,11 @@
+<?php require_once("Includes/DB.php");?>
+
+ <?php require_once("Includes/Functions.php");?>
+
+ <?php require_once("Includes/Sessions.php");?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,16 +96,75 @@
         <i class="fas fa-check"></i> Approve Comments
       </a>
     </div>
-    </div>
-    
-      
-    
-    
-    
+    </div>  
   </div>
 </header>
-<br>
+
 <!--Header End-->
+
+<!--Main Area-->
+
+
+<section class="container py-2 mb-4">
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Date&Time</th>
+          <th>Author</th>
+          <th>Banner</th>
+          <th>Comments</th>
+          <th>Action</th>
+          <th>Live Preview</th>
+        </tr>
+        </thead>
+        <?php 
+
+          global $ConnectingDB;
+          $sql = "SELECT * FROM posts";
+          $stmt= $ConnectingDB->query($sql);
+          $sr=0;
+          while ($Datarows= $stmt->fetch()) {
+            $Id        = $Datarows["id"];
+            $DateTime  = $Datarows["datetime"];
+            $PostTitle = $Datarows["title"];
+            $Category  = $Datarows["category"];
+            $Admin     = $Datarows["author"];
+            $Image     = $Datarows["image"];
+            $PostText  = $Datarows["post"];
+            $sr++;
+          
+
+         ?>
+         <tbody>
+         <tr>
+          <td><?php echo $sr ?></td>
+           <td><?php echo $PostTitle ?></td>
+           <td><?php echo $Category ?></td>
+           <td><?php echo $DateTime ?></td>
+           <td><?php echo $Admin ?></td>
+           <td><img src="Uploads/<?php echo $Image ?>" height="70px;" width="170px; " > </td>
+           <td>Comments</td>
+           <td>
+            <a href="#"><span class="btn btn-warning">Edit</span></a>
+            <a href="#"><span class="btn btn-danger">Delete</span></a>
+           </td>
+           <td><a href="#"><span class="btn btn-primary">Live Preview</span></a></td>
+           <?php } ?>
+         </tr>
+       </tbody>
+      </table>
+    </div>
+  </div>
+  
+</section>
+
+
+<!--Main Area end-->
 
 <!--Footer-->
 <footer class="bg-dark text-white">
