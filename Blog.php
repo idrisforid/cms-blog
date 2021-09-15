@@ -1,3 +1,11 @@
+<?php require_once("Includes/DB.php");?>
+
+ <?php require_once("Includes/Functions.php");?>
+
+ <?php require_once("Includes/Sessions.php");?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,8 +76,53 @@
     <!--Main area start-->
 
     <div class="col-sm-8" >
-      <h1>the complete responsive blog</h1>
-      <h1 class="lead">the complete blog</h1>
+      <h1>the complete responsive cms blog</h1>
+      <h1 class="lead">the complete blog using php by mohammad forid</h1>
+
+      <?php 
+         global $ConnectingDB;
+         $sql  = "SELECT * FROM posts ORDER BY id desc";
+         $stmt = $ConnectingDB->query($sql);
+         $sr=0;
+         while ($DataRows = $stmt->fetch()) {
+           $PostId    = $DataRows["id"];
+           $DateTime  = $DataRows["datetime"];
+           $PostTitle = $DataRows["title"];
+           $Category  = $DataRows["category"];
+           $Admin     = $DataRows["author"];
+           $Image     = $DataRows["image"];
+           $PostDescription = $DataRows["post"];
+           $sr++;
+         
+       ?>
+
+       <div class="card">
+        <img src="Uploads/<?php echo htmlentities($Image) ;?>" style="max-height: 350px;" class="img-fluid card-img-top" />
+         <div class="card-body">
+           <h4 class="card-title">
+            <?php echo $sr."."; ?>
+            <?php echo htmlentities($PostTitle)  ; ?>
+              
+            </h4>
+           <small class="text-muted">Written by <?php echo htmlentities($Admin); ?> on <?php echo htmlentities($DateTime) ; ?></small>
+           <span style="float: right;" class="badge badge-dark text-white">Comments 20</span>
+           <hr>
+           <p class="card-text">
+            <?php if (strlen($PostDescription)>150) {
+              $PostDescription = substr($PostDescription, 0,150)."...";
+            } 
+              echo htmlentities($PostDescription) ;
+            ?>
+            
+              
+            </p>
+           <a href="FullPost.php" style="float:right;">
+             <span class="btn btn-info">Read More >></span>
+           </a>
+         </div>
+       </div>
+     <?php } ?>
+
     </div>
 
     <!--Main area end-->
