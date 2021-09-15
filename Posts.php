@@ -143,11 +143,43 @@
          <tbody>
          <tr>
           <td><?php echo $sr ?></td>
-           <td><?php echo $PostTitle ?></td>
-           <td><?php echo $Category ?></td>
-           <td><?php echo $DateTime ?></td>
-           <td><?php echo $Admin ?></td>
-           <td><img src="Uploads/<?php echo $Image ?>" height="70px;" width="170px; " > </td>
+           <td> 
+            <?php if (strlen($PostTitle)>=20) {
+             $PostTitle= substr($PostTitle, 0,16).'..';
+            } 
+             echo $PostTitle; 
+             ?>
+              
+            </td>
+           <td>
+
+            <?php if (strlen($Category)>=6) {
+             $Category= substr($Category, 0,6).'..';
+            } 
+             echo $Category; 
+             ?>
+              
+            </td>
+           <td>
+
+            <?php if (strlen($DateTime)>=10) {
+             $DateTime= substr($DateTime, 0,12).'..';
+            } 
+             echo $DateTime; 
+             ?>
+              
+            </td>
+           <td>
+
+            <?php if (strlen($Admin)>=6) {
+             $Admin= substr($Admin, 0,6).'..';
+            } 
+             echo $Admin; 
+             ?>
+              
+
+            </td>
+           <td><img src="Uploads/<?php echo $Image ?>" height="50px;" width="150px; " > </td>
            <td>Comments</td>
            <td>
             <a href="#"><span class="btn btn-warning">Edit</span></a>
