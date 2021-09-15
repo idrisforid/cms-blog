@@ -79,7 +79,10 @@
     <div class="col-sm-8" >
       <h1>the complete responsive cms blog</h1>
       <h1 class="lead">the complete blog using php by mohammad forid</h1>
-
+       <?php 
+           echo ErrorMessage();
+           echo SuccessMessage();
+         ?>
       <?php
          global $ConnectingDB;
          //SQL query when search button is active
@@ -97,7 +100,12 @@
             
          //default sql query
          else{
-         $sql  = "SELECT * FROM posts ORDER BY id desc";
+          $PostIdFromURL= $_GET["id"];
+          if (!isset($PostIdFromURL)) {
+            $_SESSION["ErrorMessage"]="Bad Request happened!";
+            Redirect_to("Blog.php");
+          }
+         $sql  = "SELECT * FROM posts WHERE id='$PostIdFromURL' ";
          $stmt = $ConnectingDB->query($sql);
              }
          
@@ -126,17 +134,11 @@
            <span style="float: right;" class="badge badge-dark text-white">Comments 20</span>
            <hr>
            <p class="card-text">
-            <?php if (strlen($PostDescription)>150) {
-              $PostDescription = substr($PostDescription, 0,150)."...";
-            } 
-              echo htmlentities($PostDescription) ;
-            ?>
             
+            <?php echo htmlentities($PostDescription); ?>
               
             </p>
-           <a href="FullPost.php?id=<?php echo $PostId; ?>" style="float:right;">
-             <span class="btn btn-info">Read More >></span>
-           </a>
+           
          </div>
        </div>
      <?php } ?>
