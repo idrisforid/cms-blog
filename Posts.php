@@ -107,6 +107,10 @@
 
 <section class="container py-2 mb-4">
   <div class="row">
+     <?php 
+           echo ErrorMessage();
+           echo SuccessMessage();
+         ?>
     <div class="col-lg-12">
       <table class="table table-striped table-hover">
         <thead class="thead-dark">
