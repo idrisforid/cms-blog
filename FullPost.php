@@ -4,7 +4,7 @@
 
  <?php require_once("Includes/Sessions.php");?>
 
-
+<?php $SearchQueryParameter = $_GET["id"];?>
 
 <!DOCTYPE html>
 <html>
@@ -126,7 +126,7 @@
         <img src="Uploads/<?php echo htmlentities($Image) ;?>" style="max-height: 350px;" class="img-fluid card-img-top" />
          <div class="card-body">
            <h4 class="card-title">
-            <?php echo $sr."."; ?>
+            
             <?php echo htmlentities($PostTitle)  ; ?>
               
             </h4>
@@ -142,7 +142,47 @@
          </div>
        </div>
      <?php } ?>
+          <!--Comment Area-->
+       <div class="">
+      <form class="" action="FullPost.php?id=<?php echo $SearchQueryParameter;?>" method="post">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h5 class="FieldInfo">Share Your Thoughts about this post</h5>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="input-group">
+                <div>
+                  <span class="input-group-text"><i class="fas fa-user pb-2"></i></span>
+                </div>
+              <input class="form-control" type="text" name="CommenterName" placeholder="Name">
+              </div>
+            </div>
 
+            <div class="form-group">
+              <div class="input-group">
+                <div>
+                  <span class="input-group-text"><i class="fas fa-envelope pb-2"></i></span>
+                </div>
+              <input class="form-control" type="email" name="CommenterEmail" placeholder="Email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea name="CommenterThoughts" class="form-control" rows="6" cols="80">
+                
+              </textarea>
+            </div>
+
+            <div class="">
+              <button type="submit" name="Submit" class="btn btn-primary">Submit</button>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+       <!--Comment Area End-->
     </div>
 
     <!--Main area end-->

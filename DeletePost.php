@@ -20,7 +20,7 @@ $SearchQueryParameter = $_GET['id'];
 
 if (isset($_POST["submit"])) {
    
-    //Fetching Existing Content according to our
+    //Deleting Existing Content according to our sql
           
 
      global $ConnectingDB;
