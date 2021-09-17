@@ -38,13 +38,14 @@ if (isset($_POST["submit"])) {
 
      global $ConnectingDB;
 
-    $sql = "INSERT INTO comments(datetime,name,email,comment,approvedby,status)";
-    $sql.= "VALUES(:dateTime,:name,:email,:comment,'Pending','OFF')";
+    $sql = "INSERT INTO comments(datetime,name,email,comment,approvedby,status,post_id)";
+    $sql.= "VALUES(:dateTime,:name,:email,:comment,'Pending','OFF',:PostIdFromURL)";
     $stmt= $ConnectingDB->prepare($sql); 
     $stmt->bindValue(':dateTime',$DateTime);
     $stmt->bindValue(':name',$Name);
     $stmt->bindValue(':email',$Email);
-    $stmt->bindValue(':comment',$Comment);  
+    $stmt->bindValue(':comment',$Comment);
+    $stmt->bindValue(':PostIdFromURL',$SearchQueryParameter);  
     $Execute=$stmt->execute();
 
     if ($Execute) {
