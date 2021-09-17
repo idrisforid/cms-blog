@@ -68,10 +68,14 @@ if (isset($_POST["submit"])) {
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet"  href="Css/Styles.css">
+     <!-- <link rel="stylesheet"  href="Css/all.min.css">
+     <link rel="stylesheet"  href="Css/fontawesome.min.css"> -->
+    
 	<title>
 		Blog Page
 	</title>
-	<link rel="stylesheet" type="text/css" href="Css/Styles.css">
+	
 </head>
 <body>
 
@@ -198,12 +202,48 @@ if (isset($_POST["submit"])) {
          </div>
        </div>
      <?php } ?>
-          <!--Comment Area-->
+          <!--Comment Area start-->
+          <br><br>
+            <span class="FieldInfo" >COMMENTS</span>
+            <br><br>
+            <!--fetching comment area start-->
+
+             <?php 
+
+              global $ConnectingDB;
+              $sql  = "SELECT * FROM comments WHERE post_id='$SearchQueryParameter' AND status='ON'";
+              $stmt = $ConnectingDB->query($sql);
+              while ($DataRows=$stmt->fetch()) {
+                 $CommentDate   = $DataRows['datetime'];
+                 $CommenterName = $DataRows['name'];
+                 $CommentContent= $DataRows['comment'];
+                
+ 
+              ?>
+              <div class="media CommentBlock">
+                <img class="d-block img-fluid align-self-start" src="Images/comment.png">
+                <div class="media">
+                  <div class="media-body ml-2">
+                    <h6 class="lead" ><?php echo $CommenterName; ?></h6>
+                    <p class="small"><?php echo $CommentDate; ?></p>
+                    <p><?php echo $CommentContent; ?></p>
+                  </div>
+                </div>
+
+              </div>
+
+             
+
+              <hr>
+            <?php } ?>
+
+            <!--fetching comment area end-->
+
        <div class="">
       <form class="" action="FullPost.php?id=<?php echo $SearchQueryParameter;?>" method="post">
         <div class="card mb-3">
           <div class="card-header">
-            <h5 class="FieldInfo">Share Your Thoughts about this post</h5>
+            <h5 class="FieldInfo" >Share Your Thoughts about this post</h5>
           </div>
           <div class="card-body">
             <div class="form-group">
