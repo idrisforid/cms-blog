@@ -7,9 +7,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        <link rel="stylesheet" type="text/css" href="Css/Styles.css">
-         <title></title>
+       <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<title>
+		Categories
+	</title>
+	<link rel="stylesheet" type="text/css" href="Css/Styles.css">
     </head>
     <body>
     	<!--Navbar Start-->
@@ -65,14 +67,46 @@
           	<div class="container">
           		<div class="row">
           			<div class="col">
-          				<h1> <i class="fas fa-text-height" style="color: #27aae1;"></i> Basic </h1>
+          				<h1> <i class="fas fa-edit" style="color: #27aae1;"></i> Manage Categories </h1>
           			</div>
           		</div>
           	</div>
           </header>
-       <!--Header Start-->
+          <br>
+       <!--Header End-->
        
-         <br>
+         <!--Main Area Start-->
+
+          <section class="container py-2 mb-4">
+          	<div class="row" style="min-height: 350px;">
+          		<div class="offset-lg-1 col-lg-10" >
+          			<form class="" action="Categories.php" method="post">
+          				<div class="card bg-secondary text-light mb-3">
+          					<div class="card-header">
+          						<h1>Add New Category</h1>
+          					</div>
+          					<div class="card-body bg-dark">
+          						<div class="form-group">
+          							<label for="title"> <span class="FieldInfo"> Category Title </span> </label>
+          							<input class="form-control" type="text" name="Title" id="" placeholder="Type title here" >
+          						</div>
+                      <div class="row">
+                         <div class="col-lg-6 mb-2">
+                           <a href="" class="btn btn-warning btn-block"> <i class="fas fa-arrow-left">Back to Dashboard</i></a>
+                         </div>
+                         <div class="col-lg-6 mb-2">
+                           <a href="" class="btn btn-success btn-block"> <i class="fas fa-arrow-check">Publish</i></a>
+                         </div>
+                      </div>
+          					</div>
+          				</div>
+          			</form>
+          		</div>
+          	</div>
+          </section>
+
+
+         <!--Main Area End-->
 
       <!--Footer Start-->
           <footer class="bg-dark text-white">
