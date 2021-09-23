@@ -1,3 +1,5 @@
+<?php require_once("Includes/DB.php") ?>
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
