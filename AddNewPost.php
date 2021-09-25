@@ -34,23 +34,28 @@ if (isset($_POST["submit"])) {
       //Query to insert to post DB when everything fine
       global $ConnectingDB;
 
-      $sql  = "INSERT INTO category (title,author,datetime)";
-      $sql .= "VALUES (:categoryName,:adminName,:dateTime)";
-      $stmt = $ConnectingDB->prepare($sql);
+      $sql  = "INSERT INTO posts (datetime,title,category,author,image,post)";
+      $sql .= "VALUES (:dateTime,:postTitle,:categoryName,:adminName,:imageName,:postDescription)";
+      $stmt= $ConnectingDB->prepare($sql);
+      $stmt->bindValue(':dateTime',$DateTime);
+      $stmt->bindValue(':postTitle',$PostTitle);
+      $stmt->bindValue(':categoryName',$Category);
+      $stmt->bindValue(':adminName',$Admin);
+      $stmt->bindValue(':imageName',$Image);
+      $stmt->bindValue(':postDescription',$PostText);
 
-      $stmt-> bindvalue(':categoryName',$Category);
-      $stmt-> bindvalue(':adminName',$Admin);
-      $stmt-> bindvalue(':dateTime',$DateTime);
 
       $Execute=$stmt->execute();
 
+      move_uploaded_file($_FILES["Image"]["tmp_name"], $Target);
+
       if ($Execute) {
          $_SESSION["SuccessMessage"]="Category Added Successfully";
-         Redirect_to("Categories.php");
+         Redirect_to("AddNewPost.php");
       }
       else{
          $_SESSION["ErrorMessage"]="Category Added Failed";
-         Redirect_to("Categories.php");
+         Redirect_to("AddNewPost.php");
       }
 
     }
