@@ -5,28 +5,33 @@
 <?php
 
 if (isset($_POST["submit"])) {
-   $Category = $_POST["CategoryTitle"];
+   
+   $PostTitle = $_POST["PostTitle"];
+   $Category  = $_POST["Category"];
+   $Image     = $_FILES["Image"]["name"];
+   $Target    = "Uploads/".basename($_FILES["Image"]["name"]);
+   $PostText  = $_POST["PostDescription"];
    $Admin = "admin";
 
    date_default_timezone_set("Asia/Dhaka");
    $CurrentTime=time();
    $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
 
-   if (empty($Category)) {
-     $_SESSION["ErrorMessage"]="All Field Must Be Filled Up!";
-     Redirect_to("Categories.php");
+   if (empty($PostTitle)) {
+     $_SESSION["ErrorMessage"]="Post Title should not be empty!";
+     Redirect_to("AddNewPost.php");
    }
-    elseif (strlen($Category)<3) {
-      $_SESSION["ErrorMessage"]="Category Title should be greater than 3 character!";
-     Redirect_to("Categories.php");
+    elseif (strlen($PostTitle)<3) {
+      $_SESSION["ErrorMessage"]="Post Title should be greater than 3 character!";
+     Redirect_to("AddNewPost.php");
     }
-    elseif (strlen($Category)>50) {
-      $_SESSION["ErrorMessage"]="Category Title should be less than 50 character!";
-     Redirect_to("Categories.php");
+    elseif (strlen($PostText)>1000) {
+      $_SESSION["ErrorMessage"]="Post Text should be less than 1000 character!";
+     Redirect_to("AddNewPost.php");
     }
     else{
       
-      //Query to insert DB when everything fine
+      //Query to insert to post DB when everything fine
       global $ConnectingDB;
 
       $sql  = "INSERT INTO category (title,author,datetime)";
@@ -143,7 +148,7 @@ if (isset($_POST["submit"])) {
                  echo SuccessMessage();
  
                  ?>
-          			<form class="" action="Categories.php" method="post">
+          			<form class="" action="AddNewPost.php" method="post" enctype="multipart/form-data">
           				<div class="card bg-secondary text-light mb-3">
           					
           					<div class="card-body bg-dark">
@@ -153,7 +158,7 @@ if (isset($_POST["submit"])) {
           						</div>
                       <div class="form-group">
                         <label for="title"> <span class="FieldInfo"> Choose Category </span> </label>
-                        <select class="form-control" id="CategoryTitle" name="category">
+                        <select class="form-control" id="CategoryTitle" name="Category">
                           
                           <?php 
 
@@ -180,7 +185,7 @@ if (isset($_POST["submit"])) {
 
                       <div class="form-group">
                         <label for="post"> <span class="FieldInfo"> Post Details </span> </label>
-                        <textarea class="form-control" id="post" name="postdescription" rows="8" cols="80">
+                        <textarea class="form-control" id="post" name="PostDescription" rows="8" cols="80">
                           
                         </textarea>
                       </div>
