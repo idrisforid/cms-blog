@@ -6,14 +6,24 @@
 
 if (isset($_POST["submit"])) {
    $Category = $_POST["CategoryTitle"];
+   $Admin = "admin";
    if (empty($Category)) {
      $_SESSION["ErrorMessage"]="All Field Must Be Filled Up!";
      Redirect_to("Categories.php");
    }
-    if (!empty($Category)) {
-     $_SESSION["SuccessMessage"]="thanks!";
+    elseif (strlen($Category)<3) {
+      $_SESSION["ErrorMessage"]="Category Title should be greater than 3 character!";
      Redirect_to("Categories.php");
-   }
+    }
+    elseif (strlen($Category)>50) {
+      $_SESSION["ErrorMessage"]="Category Title should be less than 50 character!";
+     Redirect_to("Categories.php");
+    }
+    else{
+      echo "hello";
+      //Query to insert DB when everything fine
+    }
+
 }
 
 
