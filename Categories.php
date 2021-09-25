@@ -7,6 +7,11 @@
 if (isset($_POST["submit"])) {
    $Category = $_POST["CategoryTitle"];
    $Admin = "admin";
+
+   date_default_timezone_set("Asia/Dhaka");
+   $CurrentTime=time();
+   $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
+
    if (empty($Category)) {
      $_SESSION["ErrorMessage"]="All Field Must Be Filled Up!";
      Redirect_to("Categories.php");
@@ -20,8 +25,29 @@ if (isset($_POST["submit"])) {
      Redirect_to("Categories.php");
     }
     else{
-      echo "hello";
+      
       //Query to insert DB when everything fine
+      global $ConnectingDB;
+
+      $sql  = "INSERT INTO category (title,author,datetime)";
+      $sql .= "VALUES (:categoryName,:adminName,:dateTime)";
+      $stmt = $ConnectingDB->prepare($sql);
+
+      $stmt-> bindvalue(':categoryName',$Category);
+      $stmt-> bindvalue(':adminName',$Admin);
+      $stmt-> bindvalue(':dateTime',$DateTime);
+
+      $Execute=$stmt->execute();
+
+      if ($Execute) {
+         $_SESSION["SuccessMessage"]="Category Added Successfully";
+         Redirect_to("Categories.php");
+      }
+      else{
+         $_SESSION["ErrorMessage"]="Category Added Failed";
+         Redirect_to("Categories.php");
+      }
+
     }
 
 }
