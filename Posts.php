@@ -1,3 +1,8 @@
+<?php require_once("Includes/DB.php") ?>
+<?php require_once("Includes/Functions.php") ?>
+<?php require_once("Includes/Sessions.php") ?>
+
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -92,7 +97,66 @@
           </header>
        <!--Header Start-->
        
-         <br>
+         <!--Main Area Start -->
+
+          <section class="container" py-2 mb-4>
+            <div class="row">
+               <div class="col-lg-12">
+                 <table class="table table-striped table-hover">
+                   <thead class="thead-dark">
+                     <tr>
+                       <th>#</th>
+                       <th>Title</th>
+                       <th>Category</th>
+                       <th>Date&Time</th>
+                       <th>Author</th>
+                       <th>Banner</th>
+                       <th>Comments</th>
+                       <th>Action</th>
+                       <th>Live Preview</th>
+                     </tr>
+
+                     <?php 
+
+                      global $ConnectingDB;
+                      $sql="SELECT * FROM posts";
+                      $stmt= $ConnectingDB->query($sql);
+                      $sr=0;
+                      while($Datarows= $stmt->fetch()){
+
+                        $Id       = $Datarows["id"];
+                        $DateTime =$Datarows["datetime"];
+                        $PostTitle=$Datarows["title"];
+                        $Category = $Datarows["category"];
+                        $Admin    = $Datarows["author"];
+                        $Image    =$Datarows["image"];
+                        $PostText =$Datarows["post"];
+
+                       
+                      $sr++;
+                      ?>
+
+
+                     <tr>
+                       <td><?php echo $sr; ?></td>
+                       <td><?php echo $PostTitle; ?></td>
+                       <td><?php echo $Category; ?></td>
+                       <td><?php echo $DateTime; ?></td>
+                       <td><?php echo $Admin; ?></td>
+                       <td><img src="Uploads/<?php echo $Image ?>" height="70px;" width="170px;"></td>
+                       <td><span class="btn btn-warning"> Edit</span></td>
+                       <td><span class="btn btn-danger">Delete</span></td>
+                       <td><span class="btn btn-primary">Live Preview</span></td>
+                     <?php } ?>
+                     </tr>
+                   </thead>
+                 </table>
+               </div>
+            </div>
+          </section>
+
+
+         <!--Main Area End -->
 
       <!--Footer Start-->
           <footer class="bg-dark text-white">
