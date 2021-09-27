@@ -50,11 +50,11 @@ if (isset($_POST["submit"])) {
       move_uploaded_file($_FILES["Image"]["tmp_name"], $Target);
 
       if ($Execute) {
-         $_SESSION["SuccessMessage"]="Category Added Successfully";
+         $_SESSION["SuccessMessage"]="New Post Added Successfully";
          Redirect_to("AddNewPost.php");
       }
       else{
-         $_SESSION["ErrorMessage"]="Category Added Failed";
+         $_SESSION["ErrorMessage"]=" New Post Adding Failed";
          Redirect_to("AddNewPost.php");
       }
 
