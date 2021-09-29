@@ -51,7 +51,10 @@
       		<form class="form-inline d-none d-sm-block" action="Blog.php">
             <div class="form-group">
               <input class="form-control mr-2" type="text" name="Search" placeholder="Search here">
-              <button type="button" class="btn btn-primary" name="SearchButton">Go</button>
+              <button  class="btn btn-primary" name="SearchButton">Go</button>
+               
+                 
+               
             </div>
           </form>
       	</ul>
@@ -75,13 +78,27 @@
                 <h1>The Complete responsive blog</h1>
                 <h1 class="lead"> the complete blog</h1>
 
-                 <?php 
-
+                 <?php
                    global $ConnectingDB;
+                   //SQL query when search button is active
+                   if (isset($_GET["SearchButton"])) {
+                   $Search =$_GET["Search"];
+                   $sql = "SELECT * FROM posts
+                   Where datetime like :search
+                   OR title LIKE :search
+                   OR category LIKE :search
+                   OR post LIKE :search";
 
-                   $sql= "SELECT * FROM posts";
+                   $stmt=$ConnectingDB->prepare($sql);
+                   $stmt->bindvalue(':search','%'.$Search.'%'); 
+                   $stmt->execute();
+                   
+                 }
+                   //default sql query
+                  else{
+                   $sql= "SELECT * FROM posts ORDER BY id desc";
                    $stmt= $ConnectingDB->query($sql);
-
+                   }
                    while ($DataRows = $stmt->fetch()) {
                      $PostId          = $DataRows["id"];
                      $Datetime        =$DataRows["datetime"];
