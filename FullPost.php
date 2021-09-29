@@ -64,18 +64,14 @@
 
       </nav> 
        <div style="height: 10px; background-color: #27aae1;"></div>
-      <!--Navbar End-->
+      <!--Navbar Start-->
 
-       <?php 
-                 echo ErrorMessage();
-                 echo SuccessMessage();
- 
-       ?>
+       
 
        <!--Header Start-->
           <div class="container">
             <div class="row mt-4">
-             
+
 
               <!--Main area start-->
               <div class="col-sm-8">
@@ -100,7 +96,12 @@
                  }
                    //default sql query
                   else{
-                   $sql= "SELECT * FROM posts ORDER BY id desc";
+                    $PostIdFromURL= $_GET["id"];
+                    if (!isset($PostIdFromURL)) {
+                      $_SESSION["ErrorMessage"]="Bad Request Happened!";
+                      Redirect_to("Blog.php");
+                    }
+                   $sql= "SELECT * FROM posts WHERE id='$PostIdFromURL'";
                    $stmt= $ConnectingDB->query($sql);
                    }
                    while ($DataRows = $stmt->fetch()) {
@@ -126,9 +127,7 @@
                     <p class="card-text">
                       <?php 
                          
-                         if (strlen($PostDescription)>150) {
-                           $PostDescription = substr($PostDescription, 0,150)."...";
-                         }
+                         
                          echo $PostDescription;
 
                        ?>
