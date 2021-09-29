@@ -1,3 +1,9 @@
+<?php require_once("Includes/DB.php") ?>
+<?php require_once("Includes/Functions.php") ?>
+<?php require_once("Includes/Sessions.php") ?>
+
+
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -61,19 +67,73 @@
 
        <!--Header Start-->
           <div class="container">
-            <div class="row">
+            <div class="row mt-4">
+
+
+              <!--Main area start-->
               <div class="col-sm-8">
                 <h1>The Complete responsive blog</h1>
                 <h1 class="lead"> the complete blog</h1>
+
+                 <?php 
+
+                   global $ConnectingDB;
+
+                   $sql= "SELECT * FROM posts";
+                   $stmt= $ConnectingDB->query($sql);
+
+                   while ($DataRows = $stmt->fetch()) {
+                     $PostId          = $DataRows["id"];
+                     $Datetime        =$DataRows["datetime"];
+                     $PostTitle       =$DataRows["title"];
+                     $Category        =$DataRows["category"];
+                     $Admin           = $DataRows["author"];
+                     $Image           =$DataRows["image"];
+                     $PostDescription =$DataRows["post"];
+                   
+
+                  ?>
+
+                  <div class="card">
+                    <img src="Uploads/<?php echo($Image) ;?>" style="max-height:350px; class="img-fluid card-img-top"/>
+                    <div class="card-body">
+                    <h4 class="card-title"><?php echo $PostTitle; ?></h4>
+                    <small class="text-muted">Written By <?php echo $Admin; ?> on <?php echo $Datetime; ?></small>
+                    <span style="float: right;" class="badge badge-dark text-white">Comments 20</span>
+                    <hr>
+                    
+                    <p class="card-text">
+                      <?php 
+                         
+                         if (strlen($PostDescription)>150) {
+                           $PostDescription = substr($PostDescription, 0,150)."...";
+                         }
+                         echo $PostDescription;
+
+                       ?>
+
+                    </p>
+                     <a href="Fullpost.php" style="float:right;">
+                       <span class="btn btn-info">Read more >></span>
+                     </a>
+                     </div>
+                  </div>
+                  <?php } ?>
               </div>
+              <!--Main area End-->
+               
+
+
+              <!--Side area start-->
               <div class="col-sm-4" style="min-height: 40px; background: green;">
                 
               </div>
+              <!--Side area End-->
             </div>
           </div>
-       <!--Header Start-->
+       <!--Header End-->
        
-         <br>
+         
 
       <!--Footer Start-->
           <footer class="bg-dark text-white">
