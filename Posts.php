@@ -178,9 +178,9 @@
                        </td>
                        <td><img src="Uploads/<?php echo $Image ?>" height="70px;" width="170px;"></td>
                        <td>Comments</td>
-                       <td><a href=""><span class="btn btn-warning"> Edit</span></a>
-                       <a href=""><span class="btn btn-danger">Delete</span></a></td>
-                       <td><span class="btn btn-primary">Live Preview</span></td>
+                       <td><a href="EditPost.php?id=<?php echo $Id;?>"><span class="btn btn-warning"> Edit</span></a>
+                       <a href="DeletePost.php?id=<?php echo $Id;?>"><span class="btn btn-danger">Delete</span></a></td>
+                       <td> <a href="FullPost.php?id=<?php echo $Id;?>"> <span class="btn btn-primary">Live Preview</span></a></td>
                      <?php } ?>
                      </tr>
                    </tbody>

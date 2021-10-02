@@ -64,7 +64,7 @@
 
       </nav> 
        <div style="height: 10px; background-color: #27aae1;"></div>
-      <!--Navbar Start-->
+      <!--Navbar End-->
 
        
 
@@ -133,9 +133,7 @@
                        ?>
 
                     </p>
-                     <a href="Fullpost.php?id=<?php echo $PostId; ?> " style="float:right;">
-                       <span class="btn btn-info">Read more >></span>
-                     </a>
+                     
                      </div>
                   </div>
                   <?php } ?>
