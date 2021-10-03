@@ -69,11 +69,7 @@
           <header class="bg-dark text-white py-3">
           	<div class="container">
           		<div class="row">
-                <?php 
-           echo ErrorMessage();
-           echo SuccessMessage();
-           
-                ?>
+                
           			<div class="col-md-12">
           				<h1> <i class="fas fa-blog" style="color: #27aae1;"></i> Blog Posts </h1>
           			</div>
@@ -106,6 +102,11 @@
 
           <section class="container" py-2 mb-4>
             <div class="row">
+              <?php 
+           echo ErrorMessage();
+           echo SuccessMessage();
+           
+                ?>
                <div class="col-lg-12">
                  <table class="table table-striped table-hover">
                    <thead class="thead-dark">

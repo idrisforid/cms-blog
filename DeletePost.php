@@ -8,59 +8,26 @@
 $SearchQueryParameter = $_GET['id'];
 
 if (isset($_POST["submit"])) {
-  $PostTitle= $_POST["PostTitle"];
-  $Category = $_POST["Category"];
-  $Image = $_FILES["Image"]["name"];
-  $Target   = "Uploads/".basename($_FILES["Image"]["name"]);
-  $PostText = $_POST["PostDescription"];
-  $Admin ="admin";
-
-  date_default_timezone_set("Asia/Dhaka");
-  $CurrentTime=time();
-  $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
   
-
-  if (empty($PostTitle)) {
-    $_SESSION["ErrorMessage"]= "Title Can't be empty!";
-     Redirect_to("EditPost.php?id=$SearchQueryParameter");
-  }
-  else if (strlen($PostTitle)<3) {
-    $_SESSION["ErrorMessage"]= "Post title should be greater than 3 characters";
-     Redirect_to("EditPost.php?id=$SearchQueryParameter");
-  }
-  else if (strlen($PostText)>1000) {
-    $_SESSION["ErrorMessage"]= "Post text should be less than 1000 characters";
-     Redirect_to("EditPost.php?id=$SearchQueryParameter");
-  }
-  else{
-    //Query to Update post to DB when everything fine
+  
+    //Query to Delete post to DB when everything fine
 
      global $ConnectingDB;
 
-     if (!empty($_FILES["Image"]["name"])) {
-       $sql = "UPDATE posts 
-           SET title= '$PostTitle', category='$Category', image='$Image',post='$PostText'
-           WHERE id= '$SearchQueryParameter'";
-     }
-     else{
-      $sql = "UPDATE posts 
-           SET title= '$PostTitle', category='$Category',post='$PostText'
-           WHERE id= '$SearchQueryParameter'";
-     }
-    
+    $sql = "DELETE FROM posts WHERE id='$SearchQueryParameter'";
 
     $Execute = $ConnectingDB->query($sql);
-    move_uploaded_file($_FILES["Image"]["tmp_name"],$Target);
+    
     
     if ($Execute) {
-      $_SESSION["SuccessMessage"]="Post Updated Successfully";
+      $_SESSION["SuccessMessage"]="Post Deleted Successfully";
       Redirect_to("Posts.php");
     }
     else{
       $_SESSION["ErrorMessage"]="Post Updated Fail. Try again.";
       Redirect_to("EditPost.php?id=$SearchQueryParameter");
     }
-  }
+  
 }
 ?>
 
@@ -71,7 +38,7 @@ if (isset($_POST["submit"])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <title>
-    Edit Post
+    Delete Post
   </title>
   <link rel="stylesheet" type="text/css" href="Css/Styles.css">
 </head>
@@ -130,7 +97,7 @@ if (isset($_POST["submit"])) {
 <header class="bg-dark text-white py-3">
   <div class="container">
     <div class="row">
-      <h1> <i class="fas fa-edit" style="color: #27aae1;"></i> Edit Post</h1>
+      <h1> <i class="fas fa-edit" style="color: #27aae1;"></i> Delete Post</h1>
     </div>
   </div>
 </header>
@@ -158,48 +125,29 @@ if (isset($_POST["submit"])) {
            }
          ?>
 
-        <form class="" action="EditPost.php?id=<?php echo $SearchQueryParameter; ?>" method="post" enctype="multipart/form-data">
+        <form class="" action="DeletePost.php?id=<?php echo $SearchQueryParameter; ?>" method="post" enctype="multipart/form-data">
            <div class="card bg-secondary text-light mb-3">
              
              <div class="card-body bg-dark">
                <div class="form-group">
                  <label for="title"> <span class="FieldInfo"> Post Title </span> </label>
-                 <input class="form-control" type="text" name="PostTitle" id="title" placeholder="Type title here" value="<?php echo $TitleToBeUpdated;?>">
+                 <input disabled class="form-control" type="text" name="PostTitle" id="title" placeholder="Type title here" value="<?php echo $TitleToBeUpdated;?>">
                </div>
                <div class="form-group">
                 <span class="FieldInfo">Existing Category</span>
                 <?php echo $CategoryToBeUpdated; ?>
                 <br>
-                 <label for="CategoryTitle"> <span class="FieldInfo"> Choose Category </span> </label>
-                 <select class="form-control" id="CategoryTitle" name="Category">
-                  <?php 
-                    
-                    //fetching all the categories from category table
-                    global $ConnectingDB;
-                    $sql = "SELECT id,title FROM category";
-                    $stmt = $ConnectingDB->query($sql);
-                    while ($DataRows = $stmt->fetch()) {
-                      $Id = $DataRows["id"];
-                      $CategoryName=$DataRows["title"];
-
-                    
-                   ?>
-                   <option><?php echo $CategoryName; ?></option>
-                 <?php } ?>
-                </select>
+                 
                </div>
                <div class="form-group">
                 <span class="FieldInfo">Existing Image</span>
                 <img class="mb-2" src="Uploads/<?php echo $ImageToBeUpdated;?>" width=170px; height=80px; >
                 
-                 <div class="custom-file">
-                 <input class="custom-file-input" type="File" name="Image" id="imageSelect" value="">
-                 <label for="imageSelect" class="custom-file-label">Select Image</label>
-                 </div>
+                 
                </div>
                <div class="mb-3">
                  <label for="Post"> <span class="FieldInfo"> Post </span> </label>
-                 <textarea class="form-control" id="Post" name="PostDescription" rows="8" cols="80">
+                 <textarea disabled class="form-control" id="Post" name="PostDescription" rows="8" cols="80">
                    <?php echo $PostToBeUpdated; ?>
                  </textarea>
                </div>
@@ -210,7 +158,7 @@ if (isset($_POST["submit"])) {
                  </div>
 
                  <div class="col-lg-6 mb-2">
-                   <button type="submit" name="submit" class="btn btn-success btn-block"> <i class="fas fa-check"></i> Publish </button>
+                   <button type="submit" name="submit" class="btn btn-danger btn-block"> <i class="fas fa-trash"></i> Delete </button>
                  </div>
                </div>
              </div>
