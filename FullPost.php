@@ -1,7 +1,7 @@
 <?php require_once("Includes/DB.php") ?>
 <?php require_once("Includes/Functions.php") ?>
 <?php require_once("Includes/Sessions.php") ?>
-
+<?php $SearchQueryParameter = $_GET["id"]; ?>
 
 
 <!doctype html>
@@ -137,6 +137,53 @@
                      </div>
                   </div>
                   <?php } ?>
+
+               <!--Comment Area start-->
+          <div>
+            <form class="" action="FullPost.php?id=<?php echo $SearchQueryParameter; ?>" method="post">
+              <div class="card mb-3">
+                <div class="card-header">
+                  <h5 class="FieldInfo">Share Your Thoughts</h5>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      </div>
+                    
+                    <input class="form-control" type="text" name="CommenterName" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                      </div>                   
+                    <input class="form-control" type="email" name="CommenterEmail" placeholder="Email">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <textarea name="CommenterThoughts" class="form-control" rows="6" cols="80">
+                      
+                    </textarea>
+                  </div>
+
+                  <div>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+               <!--Comment Area End-->
+
+
               </div>
               <!--Main area End-->
                

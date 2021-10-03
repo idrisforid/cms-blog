@@ -101,7 +101,7 @@
          <!--Main Area Start -->
 
           <section class="container" py-2 mb-4>
-            <div class="row">
+            <div class="row" style="min-height: 370px;">
               <?php 
            echo ErrorMessage();
            echo SuccessMessage();
