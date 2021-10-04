@@ -4,6 +4,63 @@
 <?php $SearchQueryParameter = $_GET["id"]; ?>
 
 
+<?php
+
+if (isset($_POST["submit"])) {
+   $Name = $_POST["CommenterName"];
+   $Email =$_POST["CommenterEmail"];
+   $Comment=$_POST["CommenterThoughts"];
+
+   date_default_timezone_set("Asia/Dhaka");
+   $CurrentTime=time();
+   $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
+
+   if (empty($Name)||empty($Email)||empty($Comment)) {
+     $_SESSION["ErrorMessage"]="All Field Must Be Filled Up!";
+     Redirect_to("FullPost.php?id=$SearchQueryParameter");
+   }
+    elseif (strlen($Comment)>500) {
+      $_SESSION["ErrorMessage"]="Comment length should be less than 500 characters!";
+     Redirect_to("FullPost.php?id=$SearchQueryParameter");
+    }
+    
+    else{
+      
+      //Query to insert comment to DB when everything fine
+      global $ConnectingDB;
+
+      $sql  = "INSERT INTO comments (datetime,name,email,comment,approvedby,status)";
+      $sql .= "VALUES (:datetime,:name,:email,:comment,'Pending','OFF')";
+      $stmt = $ConnectingDB->prepare($sql);
+
+      $stmt-> bindvalue(':datetime',$DateTime);
+      $stmt-> bindvalue(':name',$Name);
+      $stmt-> bindvalue(':email',$Email);
+      $stmt-> bindvalue(':comment',$Comment);
+      $Execute=$stmt->execute();
+       
+          
+   //   var_dump($Execute);
+      
+
+      if ($Execute) {
+         $_SESSION["SuccessMessage"]="Comment Added Successfully";
+         Redirect_to("FullPost.php?id=$SearchQueryParameter");
+      }
+      else{
+         $_SESSION["ErrorMessage"]="Comment Added Failed";
+         Redirect_to("FullPost.php?id=$SearchQueryParameter");
+      }
+
+    }
+
+}
+
+
+
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -70,6 +127,11 @@
 
        <!--Header Start-->
           <div class="container">
+            <?php 
+                 echo ErrorMessage();
+                 echo SuccessMessage();
+ 
+                 ?>
             <div class="row mt-4">
 
 
