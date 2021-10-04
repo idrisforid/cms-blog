@@ -29,14 +29,15 @@ if (isset($_POST["submit"])) {
       //Query to insert comment to DB when everything fine
       global $ConnectingDB;
 
-      $sql  = "INSERT INTO comments (datetime,name,email,comment,approvedby,status)";
-      $sql .= "VALUES (:datetime,:name,:email,:comment,'Pending','OFF')";
+      $sql  = "INSERT INTO comments (datetime,name,email,comment,approvedby,status,post_id)";
+      $sql .= "VALUES (:datetime,:name,:email,:comment,'Pending','OFF',:PostIdFromURL)";
       $stmt = $ConnectingDB->prepare($sql);
 
       $stmt-> bindvalue(':datetime',$DateTime);
       $stmt-> bindvalue(':name',$Name);
       $stmt-> bindvalue(':email',$Email);
       $stmt-> bindvalue(':comment',$Comment);
+      $stmt-> bindvalue(':PostIdFromURL',$SearchQueryParameter);
       $Execute=$stmt->execute();
        
           
