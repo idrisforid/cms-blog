@@ -4,18 +4,21 @@
 
 <?php
 
+
+
+
 if (isset($_POST["submit"])) {
-   $Username        = $_POST["Username"];
-   $Name            = $_POST["Name"];
-   $Password        = $_POST["Password"];
-   $ConfirmPassword = $_POST["ConfirmPassword"];
+   $UserName        = $_POST["Username"];
+  $Name            = $_POST["Name"];
+  $Password        = $_POST["Password"];
+  $ConfirmPassword = $_POST["ConfirmPassword"];
    $Admin           = "admin";
 
    date_default_timezone_set("Asia/Dhaka");
    $CurrentTime=time();
    $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
 
-   if (empty($Username)||empty($Password)||empty($ConfirmPassword)) {
+   if (empty($UserName)||empty($Password)||empty($ConfirmPassword)) {
      $_SESSION["ErrorMessage"]="All Field Must Be Filled Up!";
      Redirect_to("Admins.php");
    }
@@ -27,6 +30,11 @@ if (isset($_POST["submit"])) {
       $_SESSION["ErrorMessage"]="Password and Confirm Password should be matched!";
      Redirect_to("Admins.php");
     }
+    elseif (CheckUsernameExistsOrNot($UserName)) {
+      $_SESSION["ErrorMessage"]="Username exists! try another one";
+     Redirect_to("Admins.php");
+    }
+    
     else{
       
       //Query to insert DB when everything fine
@@ -37,7 +45,7 @@ if (isset($_POST["submit"])) {
       $stmt = $ConnectingDB->prepare($sql);
 
       $stmt-> bindvalue(':dateTime',$DateTime);
-      $stmt-> bindvalue(':username',$Username);
+      $stmt-> bindvalue(':username',$UserName);
       $stmt-> bindvalue(':password',$Password);
       $stmt-> bindvalue(':aname',$Name);
       $stmt-> bindvalue(':addedby',$Admin);
@@ -45,7 +53,7 @@ if (isset($_POST["submit"])) {
 
       $Execute=$stmt->execute();
       
-    //  var_dump($Execute);
+    
 
       if ($Execute) {
          $_SESSION["SuccessMessage"]="Admin Added Successfully";
