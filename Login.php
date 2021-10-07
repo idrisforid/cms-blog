@@ -1,3 +1,37 @@
+<?php require_once("Includes/DB.php") ?>
+<?php require_once("Includes/Functions.php") ?>
+<?php require_once("Includes/Sessions.php") ?>
+
+<?php 
+
+if (isset($_POST["submit"])) {
+  $Username= $_POST["Username"];
+  $Password= $_POST["Password"];
+  if (empty($Username)||empty($Password)) {
+    $_SESSION["ErrorMessage"]="All field must be filled up";
+    Redirect_to("Login.php");
+  }
+  else{
+    //code for checking username and password from database
+    $Found_Account=Login_attempt($Username,$Password);
+    if ($Found_Account) {
+      $_SESSION["User_Id"]=$Found_Account["id"];
+      $_SESSION["UserName"]=$Found_Account["username"];
+      $_SESSION["AdminName"]=$Found_Account["aname"];
+      $_SESSION["SuccessMessage"]="welcome ".$_SESSION["AdminName"];
+      Redirect_to("Login.php");
+    }
+    else{
+      $_SESSION["ErrorMessage"]="Incorrect usrname/password";
+      Redirect_to("Login.php");
+    }
+  }
+}
+
+
+
+ ?>
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -9,7 +43,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" type="text/css" href="Css/Styles.css">
-         <title></title>
+         <title>Log In</title>
     </head>
     <body>
     	<!--Navbar Start-->
@@ -51,6 +85,11 @@
              <div class="row">
                <div class="offset-sm-3 col-sm-6" style="min-height: 480px; ">
                 <br><br>
+                <?php 
+                 echo ErrorMessage();
+                 echo SuccessMessage();
+ 
+                 ?>
                  <div class="card bg-secondary text-light">
                    <div class="card-header">
                      <h1>Wellcome Back</h1>
