@@ -9,10 +9,10 @@
 
 if (isset($_POST["submit"])) {
    $UserName        = $_POST["Username"];
-  $Name            = $_POST["Name"];
-  $Password        = $_POST["Password"];
-  $ConfirmPassword = $_POST["ConfirmPassword"];
-   $Admin           = "admin";
+   $Name            = $_POST["Name"];
+   $Password        = $_POST["Password"];
+   $ConfirmPassword = $_POST["ConfirmPassword"];
+   $Admin           = $_SESSION["UserName"];
 
    date_default_timezone_set("Asia/Dhaka");
    $CurrentTime=time();

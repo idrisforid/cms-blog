@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
       $_SESSION["UserName"]=$Found_Account["username"];
       $_SESSION["AdminName"]=$Found_Account["aname"];
       $_SESSION["SuccessMessage"]="welcome ".$_SESSION["AdminName"];
-      Redirect_to("Login.php");
+      Redirect_to("Dashboard.php");
     }
     else{
       $_SESSION["ErrorMessage"]="Incorrect usrname/password";
@@ -92,7 +92,7 @@ if (isset($_POST["submit"])) {
                  ?>
                  <div class="card bg-secondary text-light">
                    <div class="card-header">
-                     <h1>Wellcome Back</h1>
+                     <h1>Welcome Back</h1>
                    </div>
                    <div class="card-body bg-dark">
                      <form class="" action="Login.php" method="post">

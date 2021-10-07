@@ -6,7 +6,7 @@
 
 if (isset($_POST["submit"])) {
    $Category = $_POST["CategoryTitle"];
-   $Admin = "admin";
+   $Admin = $_SESSION["UserName"];
 
    date_default_timezone_set("Asia/Dhaka");
    $CurrentTime=time();
