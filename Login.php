@@ -19,7 +19,12 @@ if (isset($_POST["submit"])) {
       $_SESSION["UserName"]=$Found_Account["username"];
       $_SESSION["AdminName"]=$Found_Account["aname"];
       $_SESSION["SuccessMessage"]="welcome ".$_SESSION["AdminName"];
-      Redirect_to("Dashboard.php");
+      if (isset($_SESSION["TrackURL"])) {
+        Redirect_to($_SESSION["TrackURL"]);
+      }else{
+        Redirect_to("Dashboard.php");
+      }
+      
     }
     else{
       $_SESSION["ErrorMessage"]="Incorrect usrname/password";

@@ -1,7 +1,10 @@
 <?php require_once("Includes/DB.php") ?>
 <?php require_once("Includes/Functions.php") ?>
 <?php require_once("Includes/Sessions.php") ?>
-<?php Confirm_Login(); ?>
+<?php 
+$_SESSION["TrackURL"]=$_SERVER["PHP_SELF"];
+
+Confirm_Login(); ?>
 <?php
 
 if (isset($_POST["submit"])) {
@@ -107,7 +110,7 @@ if (isset($_POST["submit"])) {
       	</ul>
       	<ul class="navbar-nav ml-auto">
       		<li class="nav-item">
-      			<a href="" class="nav-link text-danger"> <i class="fas fa-user-times"></i> Logout</a>
+      			<a href="Logout.php" class="nav-link text-danger"> <i class="fas fa-user-times"></i> Logout</a>
       		</li>
       	</ul>
       	</div>
