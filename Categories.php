@@ -167,6 +167,50 @@ if (isset($_POST["submit"])) {
           					</div>
           				</div>
           			</form>
+
+                 <h2>Approved Comments</h2>
+              <table class="table table-stripped table hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>No.</th>
+                    <th>Date&Time</th>
+                    <th>Category Name</th>
+                    <th>Crator Name</th>
+                    <th>Action</th>
+                    
+                  </tr>
+                </thead>
+
+                 <?php 
+
+                   global $ConnectingDB;
+                   $sql="SELECT * FROM category ORDER BY id desc ";
+                   $Execute=$ConnectingDB->query($sql);
+                   $SrNo=0;
+                   while($DataRows=$Execute->fetch()){
+                    $CategoryId       = $DataRows["id"];
+                    $CategoryDate     = $DataRows["datetime"];
+                    $CategoryName     = $DataRows["title"];
+                    $CreatorName      = $DataRows["author"];
+                    
+                    $SrNo++;
+                  
+                  ?>
+                  <tbody>
+                    <tr>
+                      <td><?php echo $SrNo ; ?></td>
+                      <td><?php echo $CategoryDate; ?></td>
+                      <td><?php echo $CategoryName; ?></td>
+                      <td><?php echo $CreatorName ; ?></td>
+                      
+                      <td><a href="DeleteCategories.php?id=<?php echo $CategoryId ; ?>" class="btn btn-danger">Delete</a></td>
+                      
+                      
+                    </tr>
+                  </tbody>  
+                  <?php }  ?>
+              </table>
+
           		</div>
           	</div>
           </section>
