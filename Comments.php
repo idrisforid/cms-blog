@@ -122,7 +122,7 @@ Confirm_Login(); ?>
                       <td><?php echo $DateTimeOfComment; ?></td>
                       <td><?php echo $CommenterName; ?></td>
                       <td><?php echo $CommentContent; ?></td>
-                      <td><a href="FullPost.php?id=<?php echo $CommentId; ?>" class="btn btn-success">Approve</a></td>
+                      <td><a href="ApproveComments.php?id=<?php echo $CommentId; ?>" class="btn btn-success">Approve</a></td>
                       <td><a href="FullPost.php?id=<?php echo $CommentId; ?>" class="btn btn-danger">Delete</a></td>
                       <td><a href="FullPost.php?id=<?php echo $CommentId; ?>" class="btn btn-primary">Live Preview</a></td>
                       
