@@ -135,6 +135,51 @@ Confirm_Login(); ?>
                   </tbody>  
                   <?php }  ?>
               </table>
+
+             <h2>Un-approved Comments</h2>
+              <table class="table table-stripped table hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>No.</th>
+                    <th>Date&Time</th>
+                    <th>Name</th>
+                    <th>Comment</th>
+                    <th>Revert</th>
+                    <th>Delete</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+
+                 <?php 
+
+                   global $ConnectingDB;
+                   $sql="SELECT * FROM comments WHERE status='ON' ORDER BY id desc ";
+                   $Execute=$ConnectingDB->query($sql);
+                   $SrNo=0;
+                   while($DataRows=$Execute->fetch()){
+                    $CommentId         = $DataRows["id"];
+                    $CommenterName     = $DataRows["name"];
+                    $DateTimeOfComment = $DataRows["datetime"];
+                    $CommentContent    = $DataRows["comment"];
+                    $CommentPostId     = $DataRows["post_id"];
+                    $SrNo++;
+                  
+                  ?>
+                  <tbody>
+                    <tr>
+                      <td><?php echo $SrNo ; ?></td>
+                      <td><?php echo $DateTimeOfComment; ?></td>
+                      <td><?php echo $CommenterName; ?></td>
+                      <td><?php echo $CommentContent; ?></td>
+                      <td><a href="DisapproveComments.php?id=<?php echo $CommentId; ?>" class="btn btn-warning">DisApprove</a></td>
+                      <td><a href="DeleteComments.php?id=<?php echo $CommentId; ?>" class="btn btn-danger">Delete</a></td>
+                      <td><a href="FullPost.php?id=<?php echo $CommentPostId; ?>" class="btn btn-primary">Live Preview</a></td>
+                      
+                    </tr>
+                  </tbody>  
+                  <?php }  ?>
+              </table>
+
             </div>
           </div>
         </section>
