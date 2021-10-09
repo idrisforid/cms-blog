@@ -87,6 +87,11 @@ Confirm_Login(); ?>
         <section class="container py-2 mb-4">
           <div class="row" style="min-height: 30px;">
             <div class="col-lg-12" style="min-height: 400px;">
+              <?php 
+                 echo ErrorMessage();
+                 echo SuccessMessage();
+ 
+                 ?>
               <h2>Un-approved Comments</h2>
               <table class="table table-stripped table hover">
                 <thead class="thead-dark">
@@ -123,7 +128,7 @@ Confirm_Login(); ?>
                       <td><?php echo $CommenterName; ?></td>
                       <td><?php echo $CommentContent; ?></td>
                       <td><a href="ApproveComments.php?id=<?php echo $CommentId; ?>" class="btn btn-success">Approve</a></td>
-                      <td><a href="FullPost.php?id=<?php echo $CommentId; ?>" class="btn btn-danger">Delete</a></td>
+                      <td><a href="DeleteComments.php?id=<?php echo $CommentId; ?>" class="btn btn-danger">Delete</a></td>
                       <td><a href="FullPost.php?id=<?php echo $CommentId; ?>" class="btn btn-primary">Live Preview</a></td>
                       
                     </tr>
