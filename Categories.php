@@ -168,14 +168,14 @@ if (isset($_POST["submit"])) {
           				</div>
           			</form>
 
-                 <h2>Approved Comments</h2>
+                 <h2>Existing Categories</h2>
               <table class="table table-stripped table hover">
                 <thead class="thead-dark">
                   <tr>
                     <th>No.</th>
                     <th>Date&Time</th>
                     <th>Category Name</th>
-                    <th>Crator Name</th>
+                    <th>Creator Name</th>
                     <th>Action</th>
                     
                   </tr>
