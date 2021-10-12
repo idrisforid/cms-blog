@@ -119,7 +119,11 @@ Confirm_Login(); ?>
                      <h1 class="lead">Posts</h1>
                      <h4 class="display-5">
                        <i class="fab fa-readme"></i>
-                       100
+                       <?php 
+
+                        echo TotalPosts();
+
+                        ?>
                      </h4>
                    </div>
                  </div>
@@ -130,7 +134,11 @@ Confirm_Login(); ?>
                      <h1 class="lead">Categories</h1>
                      <h4 class="display-5">
                        <i class="fas fa-folder"></i>
-                       100
+                       <?php 
+
+                        echo TotalCategories();
+
+                        ?>
                      </h4>
                    </div>
                  </div>
@@ -141,7 +149,10 @@ Confirm_Login(); ?>
                      <h1 class="lead">Admins</h1>
                      <h4 class="display-5">
                        <i class="fas fa-users"></i>
-                       100
+                       <?php 
+
+                        echo TotalAdmins() ;
+                        ?>
                      </h4>
                    </div>
                  </div>
@@ -151,7 +162,11 @@ Confirm_Login(); ?>
                      <h1 class="lead">Comments</h1>
                      <h4 class="display-5">
                        <i class="fas fa-comments"></i>
-                       100
+                       <?php 
+
+                        echo TotalComments();
+
+                        ?>
                      </h4>
                    </div>
                  </div>
