@@ -98,6 +98,18 @@
                    $stmt->execute();
                    
                  }
+                 //Query when pagination is Active
+                 elseif (isset($_GET["page"])) {
+                   $Page=$_GET["page"];
+                   if ($Page==0||$Page<0) {
+                     $ShowPostFrom=0;
+                   }
+                   else{
+                    $ShowPostFrom=($Page*4)-4;
+                   }
+                   $sql  = "SELECT * FROM posts ORDER BY id desc LIMIT $ShowPostFrom,4";
+                   $stmt = $ConnectingDB->query($sql);
+                 }
                    //default sql query
                   else{
                    $sql= "SELECT * FROM posts ORDER BY id desc";

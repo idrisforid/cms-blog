@@ -72,7 +72,7 @@ function TotalCategories(){
 
 function TotalAdmins(){
     global $ConnectingDB;
-    $sql = "SELECT COUNT(*) FROM category";
+    $sql = "SELECT COUNT(*) FROM admins";
     $stmt= $ConnectingDB->query($sql);
     $TotalRows=$stmt->fetch();
     $TotalPosts=array_shift($TotalRows);
@@ -81,7 +81,7 @@ function TotalAdmins(){
 
 function TotalComments(){
     global $ConnectingDB;
-    $sql = "SELECT COUNT(*) FROM category";
+    $sql = "SELECT COUNT(*) FROM comments";
     $stmt= $ConnectingDB->query($sql);
     $TotalRows=$stmt->fetch();
     $TotalPosts=array_shift($TotalRows);
