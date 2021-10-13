@@ -119,8 +119,17 @@
                     <img src="Uploads/<?php echo($Image) ;?>" style="max-height:350px; class="img-fluid card-img-top"/>
                     <div class="card-body">
                     <h4 class="card-title"><?php echo $PostTitle; ?></h4>
-                    <small class="text-muted">Written By <?php echo $Admin; ?> on <?php echo $Datetime; ?></small>
-                    <span style="float: right;" class="badge badge-dark text-white">Comments 20</span>
+
+                    <small class="text-muted"> 
+                      Category:   <span class="text-dark"><?php echo $Category; ?></span>
+                      Written By: <span class="text-dark"><?php echo $Admin; ?></span>
+                         <span class="text-dark"><?php echo $Datetime; ?></span>
+                    </small>
+
+                    <span style="float: right;" class="badge badge-dark text-white">Comments 
+                      <?php echo ApprovedCommentsAccordingToPost($PostId); ?>
+                        
+                      </span>
                     <hr>
                     
                     <p class="card-text">

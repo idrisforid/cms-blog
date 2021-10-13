@@ -37,7 +37,7 @@ Confirm_Login(); ?>
       			<a href="" class="nav-link"><i class="fas fa-user text-success"></i> My Profile</a>
       		</li>
       		<li class="nav-item">
-      			<a href="" class="nav-link">Dashboard</a>
+      			<a href="Dashboard.php" class="nav-link">Dashboard</a>
       		</li>
       		<li class="nav-item">
       			<a href="" class="nav-link">Post</a>
@@ -52,7 +52,7 @@ Confirm_Login(); ?>
       			<a href="" class="nav-link">Comments</a>
       		</li>
       		<li class="nav-item">
-      			<a href="" class="nav-link">Live Blog</a>
+      			<a href="blog.php" class="nav-link">Live Blog</a>
       		</li>
       	</ul>
       	<ul class="navbar-nav ml-auto">
