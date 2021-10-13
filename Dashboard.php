@@ -40,7 +40,7 @@ Confirm_Login(); ?>
       			<a href="" class="nav-link">Dashboard</a>
       		</li>
       		<li class="nav-item">
-      			<a href="" class="nav-link">Post</a>
+      			<a href="Posts.php" class="nav-link">Post</a>
       		</li>
       		<li class="nav-item">
       			<a href="" class="nav-link">Categories</a>
@@ -49,7 +49,7 @@ Confirm_Login(); ?>
       			<a href="" class="nav-link">Manage Admins</a>
       		</li>
       		<li class="nav-item">
-      			<a href="" class="nav-link">Comments</a>
+      			<a href="Comments.php" class="nav-link">Comments</a>
       		</li>
       		<li class="nav-item">
       			<a href="" class="nav-link">Live Blog</a>
@@ -216,10 +216,42 @@ Confirm_Login(); ?>
                         <td><?php echo $DateTime; ?></td>
                         <td><?php echo $Author; ?></td>
                         <td>
-                          <span class="badge badge-success">00</span>
-                          <span class="badge badge-danger">00</span>
+                          <?php 
+
+                           $Total= ApprovedCommentsAccordingToPost($PostId);
+
+                           ?>
+                          <?php
+                           if ($Total>0) {
+                            ?>
+                            <span class="badge badge-success">
+                             <?php
+                             echo $Total ;
+                           }
+
+                            ?>
+
+                        </span>
+
+                          <?php 
+
+                           $Total=DisApprovedCommentsAccordingToPost($PostId);
+
+                           ?>
+                          <?php
+                           if ($Total>0) {
+                            ?>
+                            <span class="badge badge-danger">
+                             <?php
+                             echo $Total ;
+                           }
+
+                            ?>
+
+                        </span>
+                          
                         </td>
-                        <td> <span class="btn btn-info">Preview</span></td>
+                        <td> <a target="_blank" href="FullPost.php?id=<?php echo $PostId ;?>"> <span class="btn btn-info">Preview</span></a></td>
                       </tr>
                     </tbody>
                    
