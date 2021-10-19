@@ -173,7 +173,7 @@
                     if ($Page>1) {
                       ?>
                       <li class="page-item">
-                   <a href="Blog.php?page=<?php echo $Page+1; ?>" class="page-link">&laquo;</a>
+                   <a href="Blog.php?page=<?php echo $Page-1; ?>" class="page-link">&laquo;</a>
                      </li>
                  <?php 
 
@@ -212,7 +212,7 @@
 
                 <!--Creating Forward Button-->
                  <?php 
-                  if (isset($Page)) {
+                  if (isset($Page)&&!empty($Page)) {
                     if ($Page+1<=$PostPagination) {
                       ?>
                       <li class="page-item">
