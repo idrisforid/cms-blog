@@ -234,8 +234,62 @@
 
 
               <!--Side area start-->
-              <div class="col-sm-4" style="min-height: 40px; background: green;">
+              <div class="col-sm-4">
+               <div class="card mt-4">
+                 <div class="card-body">
+                   <img src="images/startblog.png" class="d-block img-fluid mb-3">
+                   <div class="text-center">
+                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel turpis risus. Curabitur laoreet dui et tellus iaculis vulputate. Integer a rhoncus neque, at cursus enim. Aliquam dictum tempus enim, luctus pretium dolor facilisis vel.
+                   </div>
+                 </div>
+               </div>
+
+              <br>
+
+              <div class="card">
+                <div class="card-header bg-dark text-light">
+                  <h2 class="lead">Sign Up</h2>
+                </div>
+                <div class="card-body">
+                  <button type="button" class="btn btn-success btn-block text-center text-white mb-3" name="button">Join The Forum</button>
+                  <button type="button" class="btn btn-danger btn-block text-center text-white mb-3" name="button">Log In</button>
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter Your Email" name="">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-primary btn-sm text-center text-white" name="button">Subscribe Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="card">
+                <div class="card-header bg-primary text-light">
+                  <h2 class="lead">Categories</h2>
+                </div>
+                <div class="card-body">
+                  <?php 
+
+
+                   global $ConnectingDB;
+                   $sql="SELECT * FROM category ORDER BY id desc";
+                   $stmt= $ConnectingDB->query($sql);
+                   while($DataRows=$stmt->fetch()){
+                         $CategoryId   = $DataRows["id"];
+                         $CategoryName =$DataRows["title"];
+                   
+
+                   ?>
+
+                <a href="Blog.php?category=<?php echo $CategoryName ;?>"><span class="heading"><?php echo $CategoryName; ?></span></a><br>
                 
+                <?php } ?>
+
+                </div>
+
+              </div>
+
               </div>
               <!--Side area End-->
             </div>
