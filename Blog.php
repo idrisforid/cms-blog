@@ -161,6 +161,36 @@
                      </div>
                   </div>
                   <?php } ?>
+
+             <!--Pagination-->
+             <br>
+             <nav>
+               <ul class="pagination pagination-md">
+
+                <?php 
+
+                global $ConnectingDB;
+                $sql = "SELECT COUNT(*) FROM posts";
+                $stmt= $ConnectingDB->query($sql);
+                $RowPagination =$stmt->fetch();
+                $TotalPosts= array_shift($RowPagination);
+               // echo $TotalPosts."<br>";
+                $PostPagination=$TotalPosts/4;
+                $PostPagination=ceil($PostPagination);
+              //  echo $PostPagination;
+
+                for($i=1;$i<=$PostPagination;$i++){
+                  ?>
+                   <li class="page-item">
+                   <a href="Blog.php?page=<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a>
+                 </li>
+                
+                <?php  } ?>
+  
+               </ul>
+             </nav>
+
+
               </div>
               <!--Main area End-->
                
