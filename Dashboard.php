@@ -34,7 +34,7 @@ Confirm_Login(); ?>
 
       	<ul class="navbar-nav ml-auto">
       		<li class="nav-item">
-      			<a href="" class="nav-link"><i class="fas fa-user text-success"></i> My Profile</a>
+      			<a href="MyProfile.php" class="nav-link"><i class="fas fa-user text-success"></i> My Profile</a>
       		</li>
       		<li class="nav-item">
       			<a href="" class="nav-link">Dashboard</a>
