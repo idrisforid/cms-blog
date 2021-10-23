@@ -15,62 +15,59 @@ global $ConnectingDB;
 $sql = "SELECT * FROM admins WHERE id='$AdminId'";
 $stmt= $ConnectingDB->query($sql);
 while ($DataRows=$stmt->fetch()) {
-     $ExistingName= $DataRows['aname'];
+     $ExistingName     = $DataRows['aname'];
+     $ExistingUserName = $DataRows['username'];
+     $ExistingHeadLine = $DataRows['aheadline'];
+     $ExistingBio      = $DataRows['abio'];
+     $ExistingImage    = $DataRows['aimage'];
 }
 
 
 if (isset($_POST["submit"])) {
    
-   $PostTitle = $_POST["PostTitle"];
-   $Category  = $_POST["Category"];
+   $AName      = $_POST["Name"];
+   $AHeadline  = $_POST["headline"];
+   $ABio       = $_POST["bio"];
    $Image     = $_FILES["Image"]["name"];
    $Target    = "Uploads/".basename($_FILES["Image"]["name"]);
-   $PostText  = $_POST["PostDescription"];
-   $Admin = $_SESSION["UserName"];
+   
 
-   date_default_timezone_set("Asia/Dhaka");
-   $CurrentTime=time();
-   $DateTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
+   
 
-   if (empty($PostTitle)) {
-     $_SESSION["ErrorMessage"]="Post Title should not be empty!";
-     Redirect_to("AddNewPost.php");
-   }
-    elseif (strlen($PostTitle)<3) {
-      $_SESSION["ErrorMessage"]="Post Title should be greater than 3 character!";
-     Redirect_to("AddNewPost.php");
+   
+    if (strlen($AHeadline)>30) {
+      $_SESSION["ErrorMessage"]="Headline should be less than 30 characters!";
+     Redirect_to("MyProfile.php");
     }
-    elseif (strlen($PostText)>1000) {
-      $_SESSION["ErrorMessage"]="Post Text should be less than 1000 character!";
-     Redirect_to("AddNewPost.php");
+    elseif (strlen($ABio)>500) {
+      $_SESSION["ErrorMessage"]="Admin Bio should be less than 500 characters!";
+     Redirect_to("MyProfile.php");
     }
     else{
       
       //Query to insert to post DB when everything fine
       global $ConnectingDB;
 
-      $sql  = "INSERT INTO posts (datetime,title,category,author,image,post)";
-      $sql .= "VALUES (:dateTime,:postTitle,:categoryName,:adminName,:imageName,:postDescription)";
-      $stmt= $ConnectingDB->prepare($sql);
-      $stmt->bindValue(':dateTime',$DateTime);
-      $stmt->bindValue(':postTitle',$PostTitle);
-      $stmt->bindValue(':categoryName',$Category);
-      $stmt->bindValue(':adminName',$Admin);
-      $stmt->bindValue(':imageName',$Image);
-      $stmt->bindValue(':postDescription',$PostText);
-
-
-      $Execute=$stmt->execute();
-
+      if (!empty($_FILES["Image"]["name"])) {
+       $sql = "UPDATE admins 
+           SET aname= '$AName', aheadline='$AHeadline', abio='$ABio', aimage='$Image'
+           WHERE id= '$AdminId'";
+     }
+     else{
+      $sql = "UPDATE admins 
+           SET aname= '$AName', aheadline='$AHeadline', abio='$ABio'
+           WHERE id= '$AdminId'";
+     }
+      $Execute = $ConnectingDB->query($sql);
       move_uploaded_file($_FILES["Image"]["tmp_name"], $Target);
 
       if ($Execute) {
-         $_SESSION["SuccessMessage"]="New Post Added Successfully";
-         Redirect_to("AddNewPost.php");
+         $_SESSION["SuccessMessage"]="Admin Details Updated Successfully";
+         Redirect_to("MyProfile.php");
       }
       else{
-         $_SESSION["ErrorMessage"]=" New Post Adding Failed";
-         Redirect_to("AddNewPost.php");
+         $_SESSION["ErrorMessage"]=" Admin Details Update Failed";
+         Redirect_to("MyProfile.php");
       }
 
     }
@@ -150,8 +147,10 @@ if (isset($_POST["submit"])) {
           	<div class="container">
           		<div class="row">
           			<div class="col">
-          				<h1> <i class="fas fa-user mr-2" style="color: #27aae1;"></i> My Profile </h1>
+          				<h1> <i class="fas fa-user mr-2" style="color: #27aae1;"></i>@<?php echo $ExistingUserName; ?> </h1>
+                  <small><?php echo $ExistingHeadLine; ?></small>
           			</div>
+
           		</div>
           	</div>
           </header>
@@ -169,10 +168,10 @@ if (isset($_POST["submit"])) {
                     <h3><?php echo $ExistingName; ?></h3>
                   </div>
                   <div class="card-body">
-                    <img src="Images/avatar-bg.png" class="block img-fluid mb-3">
+                    <img src="Images/<?php echo $ExistingImage; ?>" class="block img-fluid mb-3">
                   </div>
                   <div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis maximus porttitor ligula et eleifend. Suspendisse ultrices tortor quam, eu interdum elit ornare quis. Integer accumsan,
+                    <?php echo $ExistingBio; ?>
                   </div>
                 </div>
               </div>
