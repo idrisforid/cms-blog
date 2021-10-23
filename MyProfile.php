@@ -183,34 +183,30 @@ if (isset($_POST["submit"])) {
                  echo SuccessMessage();
  
                  ?>
-          			<form class="" action="AddNewPost.php" method="post" enctype="multipart/form-data">
-          				<div class="card bg-secondary text-light mb-3">
+          			<form class="" action="MyProfile.php" method="post" enctype="multipart/form-data">
+          				<div class="card bg-dark text-light mb-3">
+
+                    <div class="card-header bg-secondary text-light">
+                      <h4>Edit Profile</h4>
+                    </div>
           					
           					<div class="card-body bg-dark">
           						<div class="form-group">
-          							<label for="title"> <span class="FieldInfo"> Post Title </span> </label>
-          							<input class="form-control" type="text" name="PostTitle" id="" placeholder="Type title here" >
+          							
+          							<input class="form-control" type="text" name="Name" id="" placeholder="Your Name Here" >
           						</div>
                       <div class="form-group">
-                        <label for="title"> <span class="FieldInfo"> Choose Category </span> </label>
-                        <select class="form-control" id="CategoryTitle" name="Category">
-                          
-                          <?php 
-
-                           global $ConnectingDB;
-                           $sql= "SELECT id,title from category";
-                           $stmt = $ConnectingDB->query($sql);
-                           while ($DataRows = $stmt->fetch()) {
-                             $Id = $DataRows["id"];
-                             $CategoryName = $DataRows["title"];
-                           
- 
-                           ?>
-                          <option> <?php echo $CategoryName; ?>  </option>
-                        <?php } ?>
-                        </select>
+                       <input class="form-control" type="text" name="headline" id="" placeholder="headline" > 
+                       <small class="text-muted">Add a professional headline like, 'Engineer' at XYZ or 'Architect'</small>
+                       <span class="text-danger">Not more than 30 characters</span>
                       </div>
                       <div class="form-group">
+
+                      <div class="form-group">
+                       
+                        <textarea class="form-control" placeholder="Bio" id="post" name="bio" rows="8" cols="80"></textarea>
+                      </div>
+
                       <label for="title"> <span class="FieldInfo"> Choose Image </span> </label>
                         <div class="custom-file">      
                           <input class="custom-file-input" type="File" name="Image" id="imageselect" value="">
@@ -218,12 +214,7 @@ if (isset($_POST["submit"])) {
                         </div>
                       </div>
 
-                      <div class="form-group">
-                        <label for="post"> <span class="FieldInfo"> Post Details </span> </label>
-                        <textarea class="form-control" id="post" name="PostDescription" rows="8" cols="80">
-                          
-                        </textarea>
-                      </div>
+                      
                       <div class="row">
                          <div class="col-lg-6 mb-2">
                            <button type="button" name="submit" class="btn btn-warning btn-block"> <i class="fas fa-arrow-left"></i> Back To Dashboard </button>
