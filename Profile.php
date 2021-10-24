@@ -1,3 +1,36 @@
+<?php require_once("Includes/DB.php") ?>
+<?php require_once("Includes/Functions.php") ?>
+<?php require_once("Includes/Sessions.php") ?>
+
+<!--Fetching Existing Data-->
+
+<?php 
+
+ $SearchQueryParameter= $_GET["username"];
+ global $ConnectingDB;
+ $sql= "SELECT aname, aheadline, abio, aimage FROM admins WHERE username=:userName";
+ $stmt=$ConnectingDB->prepare($sql);
+ $stmt->bindvalue(':userName',$SearchQueryParameter);
+ $stmt->execute();
+
+ $Result = $stmt->rowcount();
+
+ if ($Result==1) {
+     while($DataRows         = $stmt->fetch()){
+           $ExistingName     = $DataRows["aname"];
+           $ExistingBio      = $DataRows["abio"];
+           $ExistingImage    =$DataRows["aimage"];
+           $ExistingHeadline =$DataRows["aheadline"];
+     }
+ }
+ else{
+    $_SESSION["ErrorMessage"]="Bad Request";
+    Redirect_to("Blog.php?page=1");
+ }
+
+ ?>
+
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -67,8 +100,8 @@
           	<div class="container">
           		<div class="row">
           			<div class="col-md-6">
-          				<h1> <i class="fas fa-user text-success"></i> Name </h1>
-                  <h3>Headline</h3>
+          				<h1> <i class="fas fa-user text-success"></i> <?php echo $ExistingName; ?></h1>
+                  <h3><?php echo $ExistingHeadline; ?></h3>
           			</div>
           		</div>
           	</div>
@@ -79,12 +112,12 @@
          <section class="container py-2 mb-4">
            <div class="row">
              <div class="col-md-3">
-               <img src="Images/avatar-bg.png" class="d-block img-fluid mb-3 rounded-circle">
+               <img src="Images/<?php echo $ExistingImage; ?>" class="d-block img-fluid mb-3 rounded-circle">
              </div>
              <div class="col-md-9" style="min-height: 320px;">
                <div class="card">
                <div class="card-body">
-                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et tristique libero, a consectetur dolor. Suspendisse pulvinar id ligula sed aliquet. Quisque elementum tellus eu urna gravida, ut suscipit nunc sollicitudin.</p>
+                 <p class="lead"><?php echo $ExistingBio; ?></p>
                </div>
              </div>
              </div>
