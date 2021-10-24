@@ -141,7 +141,7 @@
 
                     <small class="text-muted"> 
                       Category:   <span class="text-dark"><?php echo $Category; ?></span>
-                      Written By: <span class="text-dark"><?php echo $Admin; ?></span>
+                      Written By: <span class="text-dark"> <a href="Profile.php?username=<?php echo $Admin ; ?>"><?php echo $Admin; ?></a></span>
                          <span class="text-dark"><?php echo $Datetime; ?></span>
                     </small>
 
